@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nazir Noori - Personal Website</title>
+  <style>
+    /* CSS Variables for theme consistency */
+    :root {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --primary-color: #2e7d32;
+      --secondary-color: #64ffda;
+      --font-family: 'Courier New', Courier, monospace;
+      --animation-duration: 0.5s;
+    }
+
+    /* Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--primary-color);
+    }
+
+    /* --- Pre-loader Screen --- */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: opacity var(--animation-duration) ease;
+    }
+
+    #start-button {
+      background: none;
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
+      padding: 10px 20px;
+      font-family: var(--font-family);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1s forwards var(--animation-duration);
+    }
+
+    #start-button:hover {
+      background-color: var(--secondary-color);
+      color: var(--bg-color);
+    }
+
+    #start-button:focus {
+      outline: none;
+    }
+
+    #typewriter-text {
+      color: var(--secondary-color);
+      font-size: 1.5rem;
+      min-height: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* --- Main Content Layout --- */
+    main {
+      max-width: 900px;
+      width: 100%;
+      padding: 40px 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--animation-duration) ease, visibility var(--animation-duration) ease;
+    }
+
+    main.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--animation-duration) ease, transform var(--animation-duration) ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--secondary-color);
+    }
+
+    h2 span {
+      color: var(--text-color);
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    .entry {
+      margin-bottom: 2rem;
+    }
+
+    .entry h3 {
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: var(--primary-color);
+    }
+
+    .entry p {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--light-text-color);
+    }
+
+    .entry ul li {
+      margin-left: 20px;
+      position: relative;
+    }
+
+    .entry ul li:before {
+      content: '›';
+      position: absolute;
+      left: -15px;
+      color: var(--secondary-color);
+    }
+
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      border: 1px solid var(--secondary-color);
+      color: var(--secondary-color);
+      padding: 5px 10px;
+      font-size: 0.8rem;
+    }
+
+    footer {
+      width: 100%;
+      max-width: 900px;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light-text-color);
+      font-size: 0.8rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .typing-cursor {
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 600px) {
+      #preloader h1 {
+        font-size: 1.2rem;
+      }
+
+      #typewriter-text {
+        font-size: 1rem;
+      }
+
+      main {
+        padding: 20px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .entry h3 {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="preloader">
+    <div id="typewriter-text"></div>
+    <button id="start-button">START</button>
+  </div>
+
+  <main id="main-content">
+    <section id="about">
+      <h2>[ about ]</h2>
+      <p>Dynamic and results-driven professional with a solid background in business administration and computer science. Proven success in collaborating with cross-functional teams, optimizing processes, and driving technological innovation across various projects. Committed to using analytical skills and business insights to improve operational efficiency and help achieve organizational goals.</p>
+    </section>
+
+    <section id="experience">
+      <h2>[ experience ]</h2>
+      <div class="entry">
+        <h3>Business Process Associate</h3>
+        <p>Accenture Southeast Asia, Kuala Lumpur, Malaysia</p>
+        <p>March 2021 - Present</p>
+        <ul>
+          <li>Evaluating business processes to identify requirements, uncover improvement opportunities, and implement effective solutions.</li>
+          <li>Communicating insights and strategic plans to cross-functional teams and management, fostering collaboration and alignment.</li>
+          <li>Collecting and analyzing information from stakeholder meetings to produce comprehensive reports for informed decision-making.</li>
+          <li>Collaborating closely with clients, technicians, and management to ensure project alignment with business objectives.</li>
+          <li>Managing competing resources and priorities, monitoring deliverables to ensure timely project completion and adherence to quality standards.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <h3>Platform Specialist</h3>
+        <p>IT Business Solutions Sdn Bhd, Mid Valley City, Malaysia</p>
+        <p>June 2019 - March 2021</p>
+        <ul>
+          <li>Collaborated with business process owners and SMEs to assess capabilities, identify pain points, and define requirements for platform solutions.</li>
+          <li>Oversaw the enforcement of client-side policies and compliance standards, ensuring platforms operated within regulatory guidelines.</li>
+          <li>Conducted user-testing and feedback sessions to improve platform usability and user experience.</li>
+          <li>Maintained and updated platform documentation to ensure clear communication and support for technical and non-technical teams.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <h3>Web Developer (Intern)</h3>
+        <p>Asia Pacific Digital, Mont Kiara, Malaysia</p>
+        <p>July 2018 - December 2019</p>
+        <ul>
+          <li>Supported website migration and revamping projects using a tech stack that included .NET, MSSQL, XML, and Sitecore CMS.</li>
+          <li>Assisted in the integration of web services and third-party APIs to enhance website functionality.</li>
+          <li>Contributed to the deployment of web content on cloud platforms, ensuring seamless delivery and performance.</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <h3>Programming Tutor (Part-Time)</h3>
+        <p>International Islamic University Malaysia, Selangor, Malaysia</p>
+        <p>March 2017 - September 2018</p>
+        <ul>
+          <li>Taught undergraduate courses in Java and Object-Oriented Programming (OOP) to a diverse group of students.</li>
+          <li>Mentored students in their final year projects, providing technical and theoretical guidance.</li>
+          <li>Evaluated and graded assignments, projects, and exams, providing constructive feedback for student development.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2>[ education ]</h2>
+      <div class="entry">
+        <h3>MBA in General Management</h3>
+        <p>University of Wales Trinity Saint David, UK</p>
+        <p>January 2020 - September 2021</p>
+        <ul>
+          <li>Awarded Academic Merit Recognition for consistently high performance.</li>
+          <li>Final project focused on "Entrepreneurship in Emerging Markets".</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <h3>BSc in Computer Science (First Class Honors)</h3>
+        <p>International Islamic University Malaysia</p>
+        <p>April 2015 - December 2019</p>
+        <ul>
+          <li>Recognized with Dean’s List honors for 8 consecutive semesters (top 10% of students).</li>
+          <li>Received Certificate of Excellence from the Afghan Embassy for 4 consecutive years.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="certifications">
+      <h2>[ certifications ]</h2>
+      <div class="tags-list">
+        <span class="tag">Google Project Management Certificate</span>
+        <span class="tag">Microsoft Project Management Professional</span>
+        <span class="tag">PMI: Generative Al for Project Managers</span>
+        <span class="tag">IBM: New Project Manager Essentials</span>
+        <span class="tag">Agile & DevOps - Accenture</span>
+        <span class="tag">Agile Principles & Methodologies</span>
+        <span class="tag">Lean Six Sigma White Belt - Aveta</span>
+        <span class="tag">Modern Supervisor Skills - ICMP</span>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>[ skills ]</h2>
+      <div class="entry">
+        <h3>Business & Project Tools</h3>
+        <p>MS Office Suite (incl. 365), Microsoft Project, Asana, Confluence</p>
+      </div>
+      <div class="entry">
+        <h3>Development & Technical</h3>
+        <p>HTML5, CSS3, JavaScript, Java, SQL, .NET, MSSQL, XML</p>
+      </div>
+      <div class="entry">
+        <h3>CMS & Platforms</h3>
+        <p>Sitecore, Umbraco, AWS (basic), REST APIs</p>
+      </div>
+      <div class="entry">
+        <h3>Soft Skills</h3>
+        <p>Analytical Thinking, Stakeholder Engagement, Team Leadership, Time Management, Communication, Adaptability</p>
+      </div>
+    </section>
+
+    <section id="languages">
+      <h2>[ languages ]</h2>
+      <ul>
+        <li>English: Fluent</li>
+        <li>Persian: Native</li>
+        <li>Pashto: Proficient</li>
+        <li>French: Basic Conversational</li>
+      </ul>
+    </section>
+
+    <section id="volunteering">
+      <h2>[ volunteering & leadership ]</h2>
+      <ul>
+        <li>Committee Member: ICTSS Subcommittee Induction (2016 & 2017)</li>
+        <li>Main Committee Member: Final Year Showcase (2015)</li>
+        <li>Active Contributor: Youth for Inclusive Wealth</li>
+        <li>Event Manager: Cultural Integration Night for International Students at IIUM</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>+60-183218150 | nazir_noori@yahoo.com | <a href="https://nazirnoori.info" target="_blank">nazirnoori.info</a> | <a href="https://www.linkedin.com/in/nazir-noori/" target="_blank">LinkedIn</a></p>
+    <p>2025 Nazir Noori. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const preloader = document.getElementById('preloader');
+      const startButton = document.getElementById('start-button');
+      const typewriterTextElement = document.getElementById('typewriter-text');
+      const mainContent = document.getElementById('main-content');
+      const sections = document.querySelectorAll('main section');
+      const textToType = "[nazir@portfolio ~]$ start";
+      let i = 0;
+
+      function typeWriter() {
+        if (i < textToType.length) {
+          typewriterTextElement.innerHTML += textToType.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50); // Adjust typing speed here
+        } else {
+          typewriterTextElement.innerHTML += '<span class="typing-cursor">_</span>';
+          setTimeout(() => {
+            startButton.style.opacity = '1';
+          }, 500);
+        }
+      }
+      typeWriter();
+      startButton.addEventListener('click', () => {
+        preloader.style.opacity = '0';
+        preloader.addEventListener('transitionend', () => {
+          preloader.style.display = 'none';
+          mainContent.classList.add('visible');
+          // Add an intersection observer for the section fade-in effect
+          const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            rootMargin: '0px',
+            threshold: 0.1
+          });
+          sections.forEach(section => {
+            observer.observe(section);
+          });
+        }, {
+          once: true
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
